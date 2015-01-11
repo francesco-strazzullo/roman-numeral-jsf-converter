@@ -126,25 +126,25 @@ public class IntegerToRomanNumeralConverter implements Converter{
 		Preconditions.checkArgument(isValidRoman(roman));
 
 		int toReturn = 0;
-		int last_digit = 0;
-		int current_digit = 0;
+		int lastDigit = 0;
+		int currentDigit = 0;
 
 		for (int i = 0; i < roman.length(); i++) {
-			current_digit = ROMAN_TO_ARABIC_CONVERSION_MAP.get(roman.charAt(i));
+			currentDigit = ROMAN_TO_ARABIC_CONVERSION_MAP.get(roman.charAt(i));
 
 			/*
 			 * If the last number is smaller than the current number, subtract the last number from the current number
 			 * Otherwise, just add the current number. We must also skip the first number from this rule simply because
 			 * if someone enters 1799 in which case it would subtract 1 from 7
 			 */
-			if (last_digit < current_digit && last_digit != 0) {
-				current_digit -= last_digit;
-				toReturn -= last_digit;
+			if (lastDigit < currentDigit && lastDigit != 0) {
+				currentDigit -= lastDigit;
+				toReturn -= lastDigit;
 			}
 			
-			toReturn += current_digit;
-			last_digit = current_digit;
-			current_digit = 0;
+			toReturn += currentDigit;
+			lastDigit = currentDigit;
+			currentDigit = 0;
 		}
 
 		return toReturn;
